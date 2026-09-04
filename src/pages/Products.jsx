@@ -92,7 +92,7 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
         <option value="over250">Over 250 EGP</option>
       </select>
      
-       {/*سيلكت وابشنز خاص بالفلتره من الاعلي للاقل والعكس */}
+       {/*سيلكت sortوابشنز خاص بالفلتره من الاعلي للاقل والعكس */}
       <select 
        value={sort}
        onChange={(e)=>setSort(e.target.value)}
@@ -103,6 +103,20 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
 
 
       </select>
+
+     {(search || categoryFilter || priceFilter || sort) && (
+        <button
+          onClick={() => {
+            setSearch("");
+            setCategoryFilter("");
+            setPriceFilter("");
+            setSort("");
+          }}
+          className="border border-gray-300 rounded-lg px-4 py-3 mb-8"
+        >
+          Clear Filters
+        </button>
+      )}
 
 
       {/*بنمرر معلومات البروداكت للكارت عشان يعرضها */}
