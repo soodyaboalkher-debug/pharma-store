@@ -1,0 +1,173 @@
+const products = [
+  // Medicine
+  {
+    id: 1,
+    name: "Panadol Extra",
+    price: 120,
+    category: "medicine",
+    rating: 4.8,
+    stock: 20,
+  },
+  {
+    id: 2,
+    name: "Brufen 400mg",
+    price: 151,
+    category: "medicine",
+    rating: 4.9,
+    stock: 22,
+  },
+  {
+    id: 3,
+    name: "Cataflam 50mg",
+    price: 300,
+    category: "medicine",
+    rating: 4.1,
+    stock: 14,
+  },
+  {
+    id: 4,
+    name: "Strepsils",
+    price: 180,
+    category: "medicine",
+    rating: 4.7,
+    stock: 17,
+  },
+
+  // Vitamins
+  {
+    id: 5,
+    name: "Vitamin C",
+    price: 180,
+    category: "vitamins",
+    rating: 3.8,
+    stock: 15,
+  },
+  {
+    id: 6,
+    name: "Vitamin D3",
+    price: 220,
+    category: "vitamins",
+    rating: 4.0,
+    stock: 18,
+  },
+  {
+    id: 7,
+    name: "Omega 3",
+    price: 350,
+    category: "vitamins",
+    rating: 5.0,
+    stock: 29,
+  },
+  {
+    id: 8,
+    name: "Multivitamin",
+    price: 280,
+    category: "vitamins",
+    rating: 4.2,
+    stock: 28,
+  },
+
+  // Skincare
+  {
+    id: 9,
+    name: "Moisturizing Cream",
+    price: 250,
+    category: "skincare",
+    rating: 3.8,
+    stock: 21,
+  },
+  {
+    id: 10,
+    name: "Face Wash",
+    price: 190,
+    category: "skincare",
+    rating: 3.8,
+    stock: 10,
+  },
+  {
+    id: 11,
+    name: "Sunscreen SPF 50",
+    price: 320,
+    category: "skincare",
+    rating: 3.8,
+    stock: 26,
+  },
+  {
+    id: 12,
+    name: "Body Lotion",
+    price: 230,
+    category: "skincare",
+    rating: 4.8,
+    stock: 40,
+  },
+
+  // Personal Care
+  {
+    id: 13,
+    name: "Shampoo",
+    price: 200,
+    category: "personal-care",
+    rating: 5.0,
+    stock: 23,
+  },
+  {
+    id: 14,
+    name: "Conditioner",
+    price: 210,
+    category: "personal-care",
+    rating: 3.8,
+    stock: 11,
+  },
+  {
+    id: 15,
+    name: "Toothpaste",
+    price: 95,
+    category: "personal-care",
+    rating: 4.8,
+    stock: 3,
+  },
+  {
+    id: 16,
+    name: "Mouthwash",
+    price: 160,
+    category: "personal-care",
+    rating: 3.7,
+    stock: 6,
+  },
+
+  // Baby Care
+  {
+    id: 17,
+    name: "Baby Lotion",
+    price: 150,
+    category: "baby-care",
+    rating: 4.9,
+    stock: 8,
+  },
+  {
+    id: 18,
+    name: "Baby Shampoo",
+    price: 170,
+    category: "baby-care",
+    rating: 3.1,
+    stock: 11,
+  },
+  {
+    id: 19,
+    name: "Baby Cream",
+    price: 140,
+    category: "baby-care",
+    rating: 4.8,
+    stock: 16,
+  },
+  {
+    id: 20,
+    name: "Baby Powder",
+    price: 110,
+    category: "baby-care",
+    rating: 4.0,
+    stock: 15,
+  },
+];
+
+export default products;
