@@ -4,6 +4,10 @@ import categories from "../data/categories";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
 
+
+
+
+// صفحة عرض المنتجات اللى من نوع واحد مثل ميدشن او فايتمنس او سكن كير 
 const Category = () => {
 const { category } = useParams();
 
@@ -13,26 +17,30 @@ const [priceFilter, setPriceFilter] = useState("");
 
 
 
-//الداله دي بتلف علي الكاتيجورى بتاعنا عشان تجيب ال سولج اللى مطابق للكاتيجورى اللى راجع من
-//  الديناميك روتر
+// داله ايجاد الكاتيجورى المطابق للكاتيجورى اللى المستخدم حدده في دروب الناف بار
 const currentCategory = categories.find(
 
   (item) => item.slug === category
 );
 
-//بنقول لو currentcategory مش موجود اعرض category not found
+//لو ملف كورنت كاتيجورى مش موجود ريترن الاتي 
 if (!currentCategory) {
   return (
     <div>
       <h1>Category Not Found</h1>
     </div>
   );
-}
-// داله بتجيب الكاتيجورى من البروداكتس وترجع كل الكاتيجورى المطابق للكاتيجورى بتاعنا
+};
+
+
+
+// داله بتجيب كل المنتجات اللى بداخل الاراي التي تحتوى علي نفس قيمة الكاتيجورى مالتنا
   const categoryProducts = products.filter(
   (product) => product.category === category
 );
 
+
+// فلترة المنتجات بتحديد سعر معين
 const filteredProducts = categoryProducts.filter((product) => {
   if (priceFilter === "under150") {
     return product.price < 150;
@@ -49,6 +57,8 @@ const filteredProducts = categoryProducts.filter((product) => {
   return true;
 });
 
+
+// فلترة المنتجات من السعر الاعلي للاقل والعكس
 const sortedProducts = [...filteredProducts].sort((a, b) => {
   if (sort === "low") {
     return a.price - b.price;
@@ -68,11 +78,12 @@ return (
         <div className="mb-8 flex items-end justify-between border-b border-slate-200 pb-5">
          <div>
 
-            {/*عرض اسم الكاتيجورى اللى انا في صفحته المكان اعلي صفحة الكاتيجورى */}
+            {/*عرض اسم الكاتيجورى مثل ميدشن او فايتمن او سكن كير */}
             <h1 className="text-3xl font-bold text-slate-900">
             {currentCategory.name}
             </h1>
-
+             
+             {/* عرض كمية المنتج  */}
             <p className="mt-2 text-sm text-slate-500">
             Showing {categoryProducts.length} products
             </p>
@@ -90,6 +101,8 @@ return (
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row">
+
+              {/* سيلكت العرض بناء علي سعر محدد */}
 
               <select
                 value={priceFilter}

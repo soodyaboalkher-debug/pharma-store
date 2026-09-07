@@ -35,7 +35,7 @@ const Products = () => {
 
 
 
- 
+// داله ال sort الخاص بالفلتره من الاعلى للاقل والعكس
 const sortedProducts = [...filteredProducts].sort((a, b) => {
   if (sort === "low") {
     return a.price - b.price;
@@ -104,6 +104,7 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
 
       </select>
 
+       {/*زرار كلير فلترس تبع صفحة البروداكتس */}
      {(search || categoryFilter || priceFilter || sort) && (
         <button
           onClick={() => {
