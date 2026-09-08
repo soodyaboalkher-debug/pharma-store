@@ -1,6 +1,6 @@
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext , useState } from "react";
 import CartContext from "../context/CartContext";
 import WishlistContext from "../context/WishlistContext";
 
@@ -8,11 +8,21 @@ import WishlistContext from "../context/WishlistContext";
 // صفحة كارد العناصر
 const ProductCard = ({ product }) => {
 
- const {addToCart} = useContext(CartContext);
+ const {addToCart ,cartItems} = useContext(CartContext);
 
  const {wishlistItems , toggleWishlist}=useContext(WishlistContext);
 
+ const [added, setAdded] = useState(false);
+
  const isInWishlist = wishlistItems.some((item)=>item.id === product.id);
+
+
+ const cartItem = cartItems.find(
+  (item) => item.id === product.id
+ );
+
+
+ const availableStock = product.stock - (cartItem?.quantity || 0);
 
 
 
@@ -79,7 +89,7 @@ const ProductCard = ({ product }) => {
 
         {/*  سبان بيعرض كمية المخزون للمنتج */}
         <span className="text-xs text-slate-500">
-          Stock: {product.stock}
+          Stock: {availableStock}
         </span>
       </div>
 
@@ -87,17 +97,35 @@ const ProductCard = ({ product }) => {
 
 
         {/* زرار اضافه اللي السله ومعاه ايموجي سله */}
-      <button
-       className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3 font-mediumtext-white transition hover:bg-blue-700"
-       onClick={()=>{
-       
-        addToCart(product,1)}}
+        <button
+          disabled={availableStock === 0}
+          
+          className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-medium text-white transition
+            ${
+              availableStock === 0
+                ? "cursor-not-allowed bg-gray-400"
+                : added
+                ? "bg-green-600 hover:bg-green-700"
+                : "bg-blue-600 hover:bg-blue-700"
+            }
+          `}
+          onClick={() => {
+            addToCart(product, 1);
+            setAdded(true);
+
+            setTimeout(() => {
+              setAdded(false);
+            }, 1000);
+          }}
         >
-        
-       
-        <FaShoppingCart />
-        Add to Cart
-      </button>
+          <FaShoppingCart />
+
+          {availableStock === 0
+            ? "Out of Stock"
+            : added
+            ? "Added to Cart ✓"
+            : "Add to Cart"}
+        </button>
     </div>
   );
 };

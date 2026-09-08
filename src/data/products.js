@@ -10,7 +10,7 @@ const products = [
     price: 120,
     category: "medicine",
     rating: 4.8,
-    stock: 20,
+    stock: 0,
     description: "A popular over-the-counter medicine commonly used for temporary relief of headaches and minor aches and pains.",
   },
 
@@ -20,7 +20,7 @@ const products = [
     price: 151,
     category: "medicine",
     rating: 4.9,
-    stock: 22,
+    stock: 5,
     description: "An over-the-counter medicine commonly used for temporary relief of pain, inflammation, and fever.",
   },
 
@@ -30,7 +30,7 @@ const products = [
     price: 300,
     category: "medicine",
     rating: 4.1,
-    stock: 14,
+    stock: 2,
     description: "A commonly used medicine for temporary relief of pain and inflammation.",
   },
 
@@ -40,7 +40,7 @@ const products = [
     price: 180,
     category: "medicine",
     rating: 4.7,
-    stock: 17,
+    stock: 9,
     description: "Throat lozenges designed to provide soothing relief from minor throat discomfort.",
   },
 
@@ -52,7 +52,7 @@ const products = [
     price: 180,
     category: "vitamins",
     rating: 3.8,
-    stock: 15,
+    stock: 3,
     description: "A vitamin C supplement designed to support daily nutritional needs and general wellness.",
   },
 
@@ -62,7 +62,7 @@ const products = [
     price: 220,
     category: "vitamins",
     rating: 4.0,
-    stock: 18,
+    stock: 6,
     description: "A vitamin D3 supplement intended to help support normal daily nutritional requirements.",
   },
 
@@ -72,7 +72,7 @@ const products = [
     price: 350,
     category: "vitamins",
     rating: 5.0,
-    stock: 29,
+    stock: 7,
     description: "An omega-3 supplement that provides essential fatty acids as part of a balanced daily diet.",
   },
 
@@ -82,7 +82,7 @@ const products = [
     price: 280,
     category: "vitamins",
     rating: 4.2,
-    stock: 28,
+    stock: 3,
     description: "A daily multivitamin supplement containing a combination of essential vitamins and nutrients.",
   },
 
@@ -94,7 +94,7 @@ const products = [
     price: 250,
     category: "skincare",
     rating: 3.8,
-    stock: 21,
+    stock: 1,
     description: "A moisturizing cream designed to help keep the skin hydrated and feeling soft and comfortable.",
   },
 
@@ -114,7 +114,7 @@ const products = [
     price: 320,
     category: "skincare",
     rating: 3.8,
-    stock: 26,
+    stock: 11,
     description: "A daily sunscreen formulated with SPF 50 to help protect the skin from harmful UV exposure.",
   },
 
@@ -124,7 +124,7 @@ const products = [
     price: 230,
     category: "skincare",
     rating: 4.8,
-    stock: 40,
+    stock: 4,
     description: "A body lotion designed to moisturize the skin and leave it feeling smooth and comfortable.",
   },
 
@@ -136,7 +136,7 @@ const products = [
     price: 200,
     category: "personal-care",
     rating: 5.0,
-    stock: 23,
+    stock: 2,
     description: "A daily hair cleanser designed to remove buildup and leave the hair feeling clean and refreshed.",
   },
 
@@ -198,7 +198,7 @@ const products = [
     price: 140,
     category: "baby-care",
     rating: 4.8,
-    stock: 16,
+    stock: 3,
     description: "A gentle baby cream designed to help moisturize and care for delicate skin.",
   },
 
@@ -208,7 +208,7 @@ const products = [
     price: 110,
     category: "baby-care",
     rating: 4.0,
-    stock: 15,
+    stock: 5,
     description: "A baby care powder designed to help keep the skin feeling dry, fresh, and comfortable.",
   },
 
