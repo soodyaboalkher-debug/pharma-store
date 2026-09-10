@@ -17,6 +17,8 @@ const CartProvider = ({ children }) => {
  if (existingProduct) {
 
   const newQuantity = existingProduct.quantity + quantity;
+
+  
     setCartItems((oldItems) =>
       oldItems.map((item) =>
         item.id === product.id
@@ -57,12 +59,13 @@ const removeFromCart = ( id)=>{
 }
 
 
-
+const clearCart = () => {setCartItems([])};
 
 
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, increaseQuantity ,decreaseQuantity ,removeFromCart}}>
+    <CartContext.Provider 
+    value={{ cartItems, addToCart, increaseQuantity ,decreaseQuantity ,removeFromCart,clearCart}}>
     {children}
     </CartContext.Provider>
   );

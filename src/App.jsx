@@ -8,6 +8,8 @@ import Category from "./pages/Category";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
+import Checkout from "./pages/Checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 
 
@@ -18,6 +20,7 @@ const App = () => {
  
 
       <Routes>
+
         <Route path="/products" element={<Products />} />
          <Route path="/" element={<Home />} />
          <Route path="/offers" element={<Offers />} />
@@ -25,6 +28,11 @@ const App = () => {
          <Route path="/products/:id" element={<ProductDetails />}/>
          <Route path="/cart" element={<Cart />} />
          <Route path="/wishlist" element={<Wishlist />} />
+         <Route path="/checkout" element={<Checkout />} />
+         <Route  path="/orderconfirmation" element={<OrderConfirmation />}/>
+
+  
+
   
 
          <Route path="/category/:category" element={<Category />} />

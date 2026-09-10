@@ -132,9 +132,10 @@ const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quan
             </span>
           </div>
 
-          <button className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          <Link to="/checkout"
+           className="block w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold text-center hover:bg-blue-700 transition">
             Checkout
-          </button>
+          </Link>
 
 
 
