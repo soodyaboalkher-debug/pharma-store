@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import CartContext from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import OrderContext from "../context/OrderContext";
 
 
 
@@ -12,6 +13,8 @@ const navigate = useNavigate();
 
 
 const {cartItems ,clearCart} = useContext(CartContext);
+
+const { addOrder } = useContext(OrderContext);
 
 const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -25,25 +28,30 @@ const [customerInfo, setCustomerInfo] = useState({
 const cartTotal = cartItems.reduce((total,item)=> total+item.price * item.quantity ,0);
 
 const handlePlaceOrder = () => {
-
   if (cartItems.length === 0) {
     alert("Your cart is empty!");
     return;
   }
 
+  const orderId = Date.now();
 
- const orderId = Date.now();
- clearCart();
+  const newOrder = {
+    orderId,
+    customerInfo,
+    paymentMethod,
+    cartItems,
+    cartTotal,
+    date: new Date().toLocaleString(),
+    status: "Pending",
+  };
 
- navigate("/orderconfirmation", {
-    state: {
-      customerInfo,
-      paymentMethod,
-      cartItems,
-      cartTotal,
-      orderId,
-    },
-});
+ addOrder(newOrder);
+
+  clearCart();
+
+  navigate("/orderconfirmation", {
+    state: newOrder,
+  });
 };
 
 

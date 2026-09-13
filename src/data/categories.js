@@ -19,6 +19,8 @@ const categories = [
     name: "Baby Care",
     slug: "baby-care",
   },
+
+
 ];
 
 export default categories;

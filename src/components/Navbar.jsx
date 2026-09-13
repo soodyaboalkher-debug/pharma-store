@@ -10,14 +10,16 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import categories from "../data/categories";
+
 import { useContext } from "react";
 import CartContext from "../context/CartContext";
 import WishlistContext from "../context/WishlistContext";
+import OrderContext from "../context/OrderContext";
 
 const Navbar = () => {
   const { cartItems } = useContext(CartContext);
   const { wishlistItems } = useContext(WishlistContext);
+  const { orders } = useContext(OrderContext);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
@@ -27,10 +29,14 @@ const Navbar = () => {
 
   const wishlistCount = wishlistItems.length;
 
+
+
+ const ordersCount = orders.length;
+
  
 
   return (
-    <nav className="w-full sticky top-0 z-50 bg-white">
+    <nav className="w-full py-2  sticky top-0 z-50 bg-[#192A45]">
       <div className="mx-auto max-w-7xl px-4">
 
         {/* Main Navbar */}
@@ -45,7 +51,7 @@ const Navbar = () => {
               <FaPlus className="text-lg text-blue-600" />
             </div>
 
-            <span className="text-xl font-bold text-slate-800">
+            <span className="text-xl font-bold text-white">
               Pharma<span className="text-blue-600">Store</span>
             </span>
 
@@ -54,41 +60,15 @@ const Navbar = () => {
           {/* Desktop Navigation Links */}
 
           <div className="hidden items-center gap-8 md:flex">
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/offers">Offers</Link>
-            <Link to="/about">About</Link>
+            <Link to="/" className="text-white p-1 font-bold rounded-2xl transition duration-300 hover:bg-white hover:text-[#064E3B] ">Home</Link>
+            <Link to="/products" className="text-white p-1 font-bold rounded-2xl transition duration-300 hover:bg-white hover:text-[#064E3B]">Products</Link>
+            <Link to="/offers" className="text-white p-1 font-bold rounded-2xl transition duration-300 hover:bg-white hover:text-[#064E3B]">Offers</Link>
+            <Link to="/about" className="text-white p-1 font-bold rounded-2xl transition duration-300 hover:bg-white hover:text-[#064E3B]">About</Link>
           </div>
 
           {/* Desktop Categories */}
 
-          <div className="relative hidden md:flex">
 
-            <button
-              onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
-              className="flex items-center gap-2 text-sm font-medium text-slate-700"
-            >
-              Categories
-              <FaChevronDown className="text-xs" />
-            </button>
-
-            {isCategoriesOpen && (
-              <div className="absolute left-0 top-full z-50 mt-3 w-52 rounded-xl bg-white p-2 shadow-lg">
-
-                {categories.map((category) => (
-                  <Link
-                    key={category.slug}
-                    to={`/category/${category.slug}`}
-                    className="block rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
-                  >
-                    {category.name}
-                  </Link>
-                ))}
-
-              </div>
-            )}
-
-          </div>
 
           {/* Search */}
 
@@ -124,14 +104,36 @@ const Navbar = () => {
 
           <div className="hidden items-center gap-5 md:flex">
 
+
+            {/* Orders */}
+
+            <Link
+              to="/orders"
+              className="relative  font-bold text-white mr-1"
+            >
+              Orders
+
+              {ordersCount > 0 && (
+                <span className="absolute -top-2 -right-5 flex
+                 h-5 w-4 items-center justify-center rounded-full bg-white text-sm text-[#064E3B]">
+                  {ordersCount}
+                </span>
+              )}
+            </Link>
+
             {/* Wishlist */}
 
             <Link
             to="/wishlist"
             className="relative"
             >
-            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs text-white">{wishlistCount}</span>
-            <FaHeart className="text-xl" />
+            <span className="absolute -top-2 -right-2 flex h-5 w-4
+             items-center justify-center rounded-full bg-white text-xs text-[#064E3B]">
+              {wishlistCount}
+            </span>
+
+
+            <FaHeart className="text-xl ml-2 mr-2 text-red-600" />
             </Link>
 
             {/* Cart */}
@@ -140,9 +142,9 @@ const Navbar = () => {
                 to="/cart"
                 className="relative"
                 >
-                <FaShoppingCart className="text-xl" />
+                <FaShoppingCart className="text-xl text-[#D4AF37]" />
 
-                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+                <span className="absolute -top-2 -right-2 flex h-5 w-4 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
                     {cartCount}
                 </span>
             </Link>
@@ -162,7 +164,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-xl text-slate-700 md:hidden"
+            className="text-xl text-white md:hidden"
           >
             <FaBars />
           </button>
@@ -172,43 +174,54 @@ const Navbar = () => {
         {/* Mobile Menu */}
 
         {isMobileMenuOpen && (
-          <div className="border-t border-slate-200 py-4 md:hidden">
+        <div className="border-t border-slate-200 py-4 md:hidden">
 
-            <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
 
-              <Link
-                to="/"
-                className="rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
-              >
-                Home
-              </Link>
 
-              <Link
-                to="/products"
-                className="rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
-              >
-                Products
-              </Link>
+              <div className="flex items-center gap-6 overflow-x-auto whitespace-nowrap">
+            
 
-              <Link
-                to="/offers"
-                className="rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
-              >
-                Offers
-              </Link>
+               <Link
+                 to="/"
+                 className="rounded-lg px-3 py-2 font-bold text-white hover:bg-slate-50 hover:text-[#064E3B]"
+                onClick={()=>setIsMobileMenuOpen(false)}
+               >
+                 Home
+               </Link>
 
-              <Link
-                to="/about"
-                className="rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
-              >
-                About
-              </Link>
+               <Link
+                 to="/products"
+                 className="rounded-lg px-3 py-2 font-bold text-white hover:bg-slate-50 hover:text-[#064E3B]"
+                 onClick={()=>setIsMobileMenuOpen(false)}
+               >
+                 Products
+               </Link>
+
+               <Link
+                 to="/offers"
+                 className="rounded-lg px-3 py-2 font-bold text-white hover:bg-slate-50 hover:text-[#064E3B]"
+                  onClick={()=>setIsMobileMenuOpen(false)}
+               >
+                 Offers
+               </Link>
+
+               <Link
+                 to="/about"
+                 className="rounded-lg px-3 py-2 font-bold text-white hover:bg-slate-50 hover:text-[#064E3B]"
+                 onClick={()=>setIsMobileMenuOpen(false)}
+               >
+                 About
+               </Link>
+              </div>
 
               <button
                 onClick={() =>
                   setIsMobileCategoriesOpen(!isMobileCategoriesOpen)
                 }
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                className="flex items-center 
+                justify-between rounded-lg px-3
+                 py-2 text-sm text-[#064E3B] bg-white"
               >
                 <span>Categories</span>
                 <FaChevronDown className="text-xs" />
@@ -220,7 +233,7 @@ const Navbar = () => {
                   <Link
                     to="/category/medicine"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600"
+                    className="block px-4 py-2 text-sm bg-slate-500 text-white hover:bg-slate-600"
                     >
                     Medicine
                   </Link>
@@ -228,7 +241,7 @@ const Navbar = () => {
                   <Link
                     to="/category/vitamins"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600"
+                    className="block px-4 py-2 text-sm bg-slate-500 text-white hover:bg-slate-600"
                     >
                     Vitamins
                   </Link>
@@ -236,7 +249,7 @@ const Navbar = () => {
                   <Link
                     to="/category/skincare"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600"
+                    className="block px-4 py-2 text-sm bg-slate-500 text-white hover:bg-slate-600"
                     >
                     Skincare
                   </Link>
@@ -244,7 +257,7 @@ const Navbar = () => {
                   <Link
                     to="/category/personal-care"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600"
+                    className="block px-4 py-2 text-sm bg-slate-500 text-white hover:bg-slate-600"
                     >
                     Personal Care
                   </Link>
@@ -252,7 +265,7 @@ const Navbar = () => {
                   <Link
                     to="/category/baby-care"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600"
+                    className="block px-4 py-2 text-sm bg-slate-500 text-white hover:bg-slate-600"
                     >
                     Baby Care
                   </Link>
@@ -263,6 +276,13 @@ const Navbar = () => {
               {/* Mobile Actions */}
 
               <div className="mt-2 flex items-center justify-around border-t border-slate-200 pt-4">
+
+                <Link
+                  to="/orders"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-600"
+                >
+                  Orders
+                </Link>
 
                 <Link
                     to="/wishlist"
@@ -291,9 +311,12 @@ const Navbar = () => {
 
               </div>
 
-            </div>
+           
+
 
           </div>
+
+        </div>
         )}
 
       </div>

@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* إخفاء شكل الـ Scrollbar مع الإبقاء على الـ Scroll */
+.sidebar-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  display: none;
+}

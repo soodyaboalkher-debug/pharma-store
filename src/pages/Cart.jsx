@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { useContext ,useState} from "react";
 import CartContext from "../context/CartContext";
 import { Link } from "react-router-dom";
 
@@ -8,9 +8,13 @@ import { Link } from "react-router-dom";
 const Cart = () => {
 
 {/* هاتلي الكارت ايتمس والانكريس كوانتتي بواسطه يوزكونتكست من كارت كونتكست */}
-const {cartItems , increaseQuantity ,decreaseQuantity , removeFromCart}=useContext(CartContext);
+const {cartItems , increaseQuantity ,decreaseQuantity , removeFromCart, clearCart}=useContext(CartContext);
 
-const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quantity , 0)
+const [showClearModal, setShowClearModal] = useState(false);
+
+const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quantity , 0);
+
+const cartCount = cartItems.reduce((total , item)=> total + item.quantity , 0);
 
 
   return (
@@ -27,17 +31,21 @@ const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quan
 
         <div className="lg:col-span-2">
           {cartItems.length === 0 ? (
-            <div className="text-center py-16" >
-
-              <p className="text-gray-500 mb-5 ">
+            <div className="py-12 text-center">
+              <p className="text-lg font-medium text-slate-700">
                 Your cart is empty.
               </p>
 
-              <Link to="/products"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700 transition">
+              <p className="mt-2 text-sm text-slate-500">
+                Add some products to your cart and they will appear here.
+              </p>
+
+              <Link
+                to="/products"
+                className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+              >
                 Browse Products
               </Link>
-
             </div>
 
             ) : (
@@ -66,17 +74,20 @@ const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quan
                  
                   <div className="flex items-center gap-2 border rounded-lg w-fit">
                     <button
-                      className="px-3 py-1"
+                      type="button"
+                      className="px-3 py-1 font-semibold text-slate-600 hover:text-blue-600 transition"
                       onClick={() => decreaseQuantity(item.id)}
                     >
                       -
                     </button>
 
-                    <span>{item.quantity}</span>
-
+                    <span className="min-w-8 text-center font-medium">
+                      {item.quantity}
+                    </span>
 
                     <button
-                      className="px-3 py-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                      type="button"
+                      className="px-3 py-1 font-semibold text-slate-600 hover:text-blue-600 transition disabled:opacity-40 disabled:cursor-not-allowed"
                       onClick={() => increaseQuantity(item.id)}
                       disabled={item.quantity >= item.stock}
                     >
@@ -99,7 +110,8 @@ const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quan
                     </p>
 
                     <button
-                      className="text-sm text-red-500 mt-2"
+                      type="button"
+                      className="mt-2 text-sm font-medium text-red-500 transition hover:text-red-700"
                       onClick={() => removeFromCart(item.id)}
                     >
                       Remove
@@ -122,25 +134,91 @@ const cartTotal = cartItems.reduce((total, item)=>total + item.price * item.quan
             Order Summary
           </h2>
 
+          <p className="text-sm text-slate-500 mb-3">
+            Items: {cartCount}
+          </p>
+
           <div className="flex items-center justify-between">
             <span className="font-medium">
               Total
             </span>
 
             <span className="text-2xl font-bold">
-              ${cartTotal}
+              {cartTotal} EGP
             </span>
           </div>
+
+          <Link
+            to="/products"
+            className="block w-full rounded-lg bg-slate-100 py-3 text-center font-semibold text-slate-700 transition hover:bg-slate-200"
+          >
+            Continue Shopping
+          </Link>
 
           <Link to="/checkout"
            className="block w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold text-center hover:bg-blue-700 transition">
             Checkout
           </Link>
 
+          <button
+            type="button"
+            onClick={() => setShowClearModal(true)}
+            className="w-full mt-3 py-3 rounded-lg border border-red-300 text-red-600 font-semibold hover:bg-red-50 transition"
+          >
+            Clear Cart
+          </button>
+
+
+          {showClearModal && (
+            <div className="fixed inset-0 z-50 flex 
+            items-center justify-center bg-slate-900/40 px-4" 
+            onClick={()=>{setShowClearModal(false)}}>
+
+              <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e)=>e.stopPropagation()}>
+                
+                <h2 className="text-xl font-bold text-slate-800">
+                  Clear Cart?
+                </h2>
+
+                <p className="mt-2 text-slate-500">
+                  Are you sure you want to remove all items from your cart?
+                </p>
+
+                <div className="mt-6 flex justify-end gap-3">
+                  
+                  <button
+                    type="button"
+                    onClick={() => setShowClearModal(false)}
+                    className="rounded-lg bg-slate-100 px-5 py-2.5 font-medium text-slate-700 hover:bg-slate-200 transition"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      clearCart();
+                      setShowClearModal(false);
+                    }}
+                    className="rounded-lg bg-red-500 px-5 py-2.5 font-medium text-white hover:bg-red-600 transition"
+                  >
+                    Clear Cart
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          )}
+
 
 
         </div>
         )}
+
+
+       
+
+
 
       </div>
     

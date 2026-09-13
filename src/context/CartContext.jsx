@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState ,useEffect} from "react";
 
 
 
@@ -7,7 +7,13 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
 
 // ستات لتخزين بيانات السله 
- const [cartItems, setCartItems] = useState([]);
+ const [cartItems, setCartItems] = useState(()=> {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart):[];
+ });
+
+
+ useEffect(()=> {localStorage.setItem("cart",JSON.stringify(cartItems));},[cartItems]);
 
 // هندلة زر الاضافة الى السله
  const addToCart = (product, quantity) => {

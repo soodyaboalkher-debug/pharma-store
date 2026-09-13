@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
 
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <div className="rounded-tr-xl rounded-bl-xl border border-[#D2C4AE] bg-[#F0FDF4] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
 
 
       {/* ديف شايل سبان لعرض صورة المنتج وبوتون شايل ايموجي القلب  */}
@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
         className={`absolute right-3
          top-3 rounded-full bg-white p-2
            shadow-sm transition
-           hover:text-red-500 ${isInWishlist ? "text-red-500" : "text-gray-400"}`}
+           hover:text-[#D4AF37] ${isInWishlist ? "text-[#D4AF37]" : "text-gray-400"}`}
            
             onClick={() => {
              
@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
 
 
         {/* براجراف شايل كاتيجورى المنتج */}
-      <p className="mb-1 text-sm text-blue-600">
+      <p className="mb-1 text-sm text-[#064E3B]">
         {product.category}
       </p>
 
@@ -64,7 +64,7 @@ const ProductCard = ({ product }) => {
        {/* لينك مكتوب بداخله اسم المنتج وبيودينا علي صفحة عرض المنتج */}
       <Link
         to={`/products/${product.id}`}
-        className="mb-2 block text-lg font-semibold text-slate-800 hover:text-blue-600"
+        className="mb-2 block text-lg font-bold text-[#064E3B] hover:text-orange-600"
       >
         {product.name}
       </Link>
@@ -81,14 +81,14 @@ const ProductCard = ({ product }) => {
 
         {/* ديف بداخله براجراف بيعرض سعر المنتج   */}
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-lg font-bold text-slate-900">
+        <p className="text-lg font-bold  text-[#064E3B]">
           {product.price} EGP
         </p>
   
 
 
         {/*  سبان بيعرض كمية المخزون للمنتج */}
-        <span className="text-xs text-slate-500">
+        <span className="font-bold text-[#064E3B]">
           Stock: {availableStock}
         </span>
       </div>
@@ -100,13 +100,12 @@ const ProductCard = ({ product }) => {
         <button
           disabled={availableStock === 0}
           
-          className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-medium text-white transition
+          className={`flex w-full  items-center border border-[#064E3B] bg-[#132238] text-[#D4AF37] 
+            justify-center gap-2 rounded-tr-xl rounded-bl-xl py-3 font-bold hover:bg-[#D4AF37] hover:text-[#132238]  transition
             ${
               availableStock === 0
-                ? "cursor-not-allowed bg-gray-400"
-                : added
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-blue-600 hover:bg-blue-700"
+                && "cursor-not-allowed bg-gray-400 hover:cursor-not-allowed hover:bg-gray-400"
+              
             }
           `}
           onClick={() => {
