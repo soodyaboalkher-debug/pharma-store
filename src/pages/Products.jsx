@@ -1,14 +1,27 @@
+
 import products from "../data/products";
 import categories from "../data/categories";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Products = () => {
-  const [search, setSearch] = useState("");
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchFromUrl = searchParams.get("search") || "";
+
+  const [search, setSearch] = useState(searchFromUrl);
+
+
+
   const [categoryFilter, setCategoryFilter] = useState("");
+
   const [priceFilter, setPriceFilter] = useState("");
+
   const [sort, setSort] = useState("");
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Filter Products
@@ -51,85 +64,92 @@ const Products = () => {
     setCategoryFilter("");
     setPriceFilter("");
     setSort("");
+
+    setSearchParams({});
   };
 
   return (
-    <div className="mx-auto max-w-8xl bg-[#EFE7D8]">
+    <div className="min-h-screen bg-[#F8FAFC]">
 
-      <div className="relative flex h-[calc(100vh-56px)] ">
+      <div className="relative flex items-start">
 
         {/* ================= SIDEBAR ================= */}
 
         {isSidebarOpen && (
-          <div className="w-80 shrink-0 p-4 bg-[#192A45] border border-[#B89753]">
-           <aside className="relative flex h-full w-72 shrink-0 flex-col rounded-2xl border border-[#B89753] bg-[#192A45]">
+          <div className="sticky top-[56px] h-[calc(100vh-56px)] w-80 shrink-0 bg-[#F0FDFA] p-4">
 
-            {/* Sidebar Header */}
-            <div className="shrink-0 border-b border-[#B89753] px-5 py-6">
+            <aside className="relative flex h-full w-72 shrink-0 flex-col rounded-2xl border border-[#CCFBF1] bg-white shadow-sm">
 
-              <h2 className="text-xl font-bold text-[#FFFFFF]">
-                Categories
-              </h2>
+              {/* Sidebar Header */}
+              <div className="shrink-0 border-b border-[#CCFBF1] px-5 py-6">
 
-            </div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#14B8A6]">
+                  Browse
+                </p>
 
-            {/* Categories Scroll Area */}
-            <div className="sidebar-scroll flex-1 overflow-y-auto px-4 py-5">
-
-              <div className="flex flex-col gap-2">
-
-                {/* All Categories */}
-                <button
-                  type="button"
-                  onClick={() => setCategoryFilter("")}
-                  className={`rounded-lg px-3 py-3 text-lg text-[#FFFFFF] text-left transition ${
-                    categoryFilter === ""
-                      ? "bg-[#2A3E5C] font-semibold"
-                      : "hover:bg-[#2A3E5C]"
-                  }`}
-                >
-                  All Categories
-                </button>
-
-                {/* Categories */}
-                {categories.map((category) => (
-                  <button
-                    key={category.slug}
-                    type="button"
-                    onClick={() =>
-                      setCategoryFilter(category.slug)
-                    }
-                    className={`rounded-lg px-3 py-3 text-[#FFFFFF] text-xl text-left transition ${
-                      categoryFilter === category.slug
-                        ? "bg-[#2A3E5C] font-semibold border border-[#4A6080]"
-                        : "hover:bg-[#2A3E5C]"
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+                <h2 className="mt-1 text-xl font-bold text-[#183B43]">
+                  Categories
+                </h2>
 
               </div>
 
-            </div>
+              {/* Categories Scroll Area */}
+              <div className="sidebar-scroll flex-1 overflow-y-auto px-4 py-5">
 
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setIsSidebarOpen(false)}
-              aria-label="Close categories"
-              className="absolute -right-4 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
-            >
-              <FaChevronLeft className="text-xs" />
-            </button>
+                <div className="flex flex-col gap-2">
 
-           </aside>
+                  {/* All Categories */}
+                  <button
+                    type="button"
+                    onClick={() => setCategoryFilter("")}
+                    className={`rounded-xl px-3 py-3 text-left text-base transition ${
+                      categoryFilter === ""
+                        ? "bg-[#CCFBF1] font-bold text-[#0F766E]"
+                        : "text-slate-600 hover:bg-[#F0FDFA] hover:text-[#0F766E]"
+                    }`}
+                  >
+                    All Categories
+                  </button>
+
+                  {/* Categories */}
+                  {categories.map((category) => (
+                    <button
+                      key={category.slug}
+                      type="button"
+                      onClick={() =>
+                        setCategoryFilter(category.slug)
+                      }
+                      className={`rounded-xl px-3 py-3 text-left text-base transition ${
+                        categoryFilter === category.slug
+                          ? "bg-[#CCFBF1] font-bold text-[#0F766E]"
+                          : "text-slate-600 hover:bg-[#F0FDFA] hover:text-[#0F766E]"
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+
+                </div>
+
+              </div>
+
+              {/* Close Sidebar Button */}
+              <button
+                type="button"
+                onClick={() => setIsSidebarOpen(false)}
+                aria-label="Close categories"
+                className="absolute -right-4 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-[#CCFBF1] bg-white text-[#0F766E] shadow-md transition hover:bg-[#CCFBF1]"
+              >
+                <FaChevronLeft className="text-xs" />
+              </button>
+
+            </aside>
           </div>
         )}
 
         {/* ================= MAIN CONTENT ================= */}
 
-        <section className="min-w-0 flex-1 overflow-y-auto px-4 py-10">
+        <section className="min-w-0 flex-1 overflow-y-auto bg-[#F8FAFC] px-4 py-10 sm:px-6 lg:px-8">
 
           {/* Open Sidebar Button */}
           {!isSidebarOpen && (
@@ -137,10 +157,7 @@ const Products = () => {
               type="button"
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Open categories"
-              className="mb-6 flex h-9
-               w-9 items-center justify-center
-                rounded-full border border-gray-200 
-                bg-white shadow-sm transition hover:shadow-md"
+              className="mb-6 flex h-9 w-9 items-center justify-center rounded-full border border-[#CCFBF1] bg-white text-[#0F766E] shadow-sm transition hover:bg-[#CCFBF1] hover:shadow-md"
             >
               <FaChevronRight className="text-xs" />
             </button>
@@ -149,11 +166,15 @@ const Products = () => {
           {/* Page Title */}
           <div className="mb-6">
 
-            <h1 className="text-3xl font-bold">
+            <p className="text-sm font-bold uppercase tracking-wider text-[#14B8A6]">
+              Pharmacy Products
+            </p>
+
+            <h1 className="mt-1 text-3xl font-bold text-[#183B43]">
               All Products
             </h1>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-slate-500">
               {sortedProducts.length} products found
             </p>
 
@@ -167,7 +188,7 @@ const Products = () => {
               placeholder="Search products..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[#D2C4AE] bg-[#FFFFFF]  px-4 py-3 outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#183B43] outline-none transition placeholder:text-slate-400 focus:border-[#14B8A6] focus:ring-2 focus:ring-[#CCFBF1]"
             />
 
           </div>
@@ -180,7 +201,7 @@ const Products = () => {
               onChange={(e) =>
                 setPriceFilter(e.target.value)
               }
-              className="rounded-lg border border-[#D2C4AE] px-3 py-2 bg-[#FFFFFF]"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-[#183B43] outline-none transition focus:border-[#14B8A6] focus:ring-2 focus:ring-[#CCFBF1]"
             >
               <option value="">
                 All Prices
@@ -204,7 +225,7 @@ const Products = () => {
               onChange={(e) =>
                 setSort(e.target.value)
               }
-              className="rounded-lg border border-[#D2C4AE] px-3 py-2 bg-[#FFFFFF]"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-[#183B43] outline-none transition focus:border-[#14B8A6] focus:ring-2 focus:ring-[#CCFBF1]"
             >
               <option value="">
                 Sort By
@@ -226,7 +247,7 @@ const Products = () => {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="rounded-lg border border-gray-300 px-4 py-2"
+                className="rounded-xl border border-[#14B8A6] bg-white px-4 py-2 text-sm font-bold text-[#0F766E] transition hover:bg-[#F0FDFA]"
               >
                 Clear Filters
               </button>
@@ -250,15 +271,23 @@ const Products = () => {
 
           ) : (
 
-            <div className="py-16 text-center">
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-16 text-center shadow-sm">
 
-              <p className="text-lg font-medium">
+              <p className="text-lg font-bold text-[#183B43]">
                 No products found.
               </p>
 
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-slate-500">
                 Try changing your search or filters.
               </p>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="mt-5 rounded-xl bg-[#14B8A6] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#0F766E]"
+              >
+                Clear Filters
+              </button>
 
             </div>
 
@@ -273,3 +302,4 @@ const Products = () => {
 };
 
 export default Products;
+

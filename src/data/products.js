@@ -12,6 +12,9 @@ const products = [
     rating: 4.8,
     stock: 0,
     description: "A popular over-the-counter medicine commonly used for temporary relief of headaches and minor aches and pains.",
+    oldPrice: 150,
+   discount: 20,
+   isOffer: true,
   },
 
   {
@@ -74,6 +77,9 @@ const products = [
     rating: 5.0,
     stock: 7,
     description: "An omega-3 supplement that provides essential fatty acids as part of a balanced daily diet.",
+    oldPrice: 420,
+    discount: 17,
+    isOffer: true,
   },
 
   {
@@ -180,6 +186,9 @@ const products = [
     rating: 4.9,
     stock: 8,
     description: "A gentle baby lotion designed to help moisturize and care for delicate baby skin.",
+    oldPrice: 190,
+    discount: 21,
+    isOffer: true,
   },
 
   {

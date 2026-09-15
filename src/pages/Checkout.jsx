@@ -1,206 +1,257 @@
+
 import { useContext, useState } from "react";
 import CartContext from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import OrderContext from "../context/OrderContext";
 
-
-
 const Checkout = () => {
+  const navigate = useNavigate();
 
+  const { cartItems, clearCart } = useContext(CartContext);
 
+  const { addOrder } = useContext(OrderContext);
 
-const navigate = useNavigate();
+  const [paymentMethod, setPaymentMethod] = useState("");
 
+  const [customerInfo, setCustomerInfo] = useState({
+    name: "",
+    phone: "",
+    address: "",
+  });
 
-const {cartItems ,clearCart} = useContext(CartContext);
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
-const { addOrder } = useContext(OrderContext);
+  const handlePlaceOrder = () => {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
 
-const [paymentMethod, setPaymentMethod] = useState("");
+    const orderId = Date.now();
 
-const [customerInfo, setCustomerInfo] = useState({
-  name: "",
-  phone: "",
-  address: "",
-});
+    const newOrder = {
+      orderId,
+      customerInfo,
+      paymentMethod,
+      cartItems,
+      cartTotal,
+      date: new Date().toLocaleString(),
+      status: "Pending",
+    };
 
+    addOrder(newOrder);
 
-const cartTotal = cartItems.reduce((total,item)=> total+item.price * item.quantity ,0);
+    clearCart();
 
-const handlePlaceOrder = () => {
-  if (cartItems.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-
-  const orderId = Date.now();
-
-  const newOrder = {
-    orderId,
-    customerInfo,
-    paymentMethod,
-    cartItems,
-    cartTotal,
-    date: new Date().toLocaleString(),
-    status: "Pending",
+    navigate("/orderconfirmation", {
+      state: newOrder,
+    });
   };
 
- addOrder(newOrder);
-
-  clearCart();
-
-  navigate("/orderconfirmation", {
-    state: newOrder,
-  });
-};
-
-
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-[#F8FAFC] px-4 py-10">
+      <div className="mx-auto max-w-6xl">
 
-      <h1 className="text-3xl font-bold mb-8">
-        Checkout
-      </h1>
+        {/* Page Header */}
+        <div className="mb-8">
+          <p className="text-sm font-bold uppercase tracking-wider text-[#14B8A6]">
+            Complete Your Order
+          </p>
 
+          <h1 className="mt-2 text-3xl font-bold text-[#0F766E] sm:text-4xl">
+            Checkout
+          </h1>
 
-       
-        {/* ديف معلومات المستخدم */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <p className="mt-2 text-slate-500">
+            Enter your information and choose your preferred payment method.
+          </p>
+        </div>
 
-        <div className="lg:col-span-2 border rounded-xl p-6">
+        {/* Checkout Content */}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
 
-          <h2 className="text-xl font-semibold mb-6">
-            Customer Information
-          </h2>
+          {/* Customer Information */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-2 sm:p-8">
 
-          <div className="space-y-4">
+            <p className="text-sm font-bold uppercase tracking-wider text-[#14B8A6]">
+              Customer Details
+            </p>
 
-            <div>
-              <label className="block mb-1 font-medium">
-                Full Name
-              </label>
+            <h2 className="mt-1 text-xl font-bold text-[#183B43]">
+              Customer Information
+            </h2>
 
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                value={customerInfo.name}
-                onChange={(e)=>setCustomerInfo({...customerInfo, name:e.target.value,})}
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-              />
-            </div>
+            <div className="mt-6 space-y-5">
 
-            <div>
-              <label className="block mb-1 font-medium">
-                Phone Number
-              </label>
+              {/* Full Name */}
+              <div>
+                <label className="mb-2 block text-sm font-bold text-[#183B43]">
+                  Full Name
+                </label>
 
-              <input
-              value={customerInfo.phone}
-              onChange={(e)=>setCustomerInfo({...customerInfo,phone:e.target.value,})}
-                type="tel"
-                placeholder="Enter your phone number"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-              />
-            </div>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={customerInfo.name}
+                  onChange={(e) =>
+                    setCustomerInfo({
+                      ...customerInfo,
+                      name: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-[#183B43] outline-none transition placeholder:text-slate-400 focus:border-[#14B8A6] focus:bg-white focus:ring-2 focus:ring-[#CCFBF1]"
+                />
+              </div>
 
-            <div>
-             <label className="block mb-1 font-medium">
-                Address
-             </label>
+              {/* Phone Number */}
+              <div>
+                <label className="mb-2 block text-sm font-bold text-[#183B43]">
+                  Phone Number
+                </label>
 
-             <input
-              value={customerInfo.address}
-              onChange={(e)=>setCustomerInfo({...customerInfo,address:e.target.value,})}
-                type="text"
-                placeholder="Enter your address"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-             />
-            </div>
+                <input
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  value={customerInfo.phone}
+                  onChange={(e) =>
+                    setCustomerInfo({
+                      ...customerInfo,
+                      phone: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-[#183B43] outline-none transition placeholder:text-slate-400 focus:border-[#14B8A6] focus:bg-white focus:ring-2 focus:ring-[#CCFBF1]"
+                />
+              </div>
 
-            <div>
-                <label className="block mb-1 font-medium">
-                    Payment Method
+              {/* Address */}
+              <div>
+                <label className="mb-2 block text-sm font-bold text-[#183B43]">
+                  Address
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="Enter your address"
+                  value={customerInfo.address}
+                  onChange={(e) =>
+                    setCustomerInfo({
+                      ...customerInfo,
+                      address: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-[#183B43] outline-none transition placeholder:text-slate-400 focus:border-[#14B8A6] focus:bg-white focus:ring-2 focus:ring-[#CCFBF1]"
+                />
+              </div>
+
+              {/* Payment Method */}
+              <div>
+                <label className="mb-2 block text-sm font-bold text-[#183B43]">
+                  Payment Method
                 </label>
 
                 <select
-                    className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-                    value={paymentMethod}
-                    onChange={(e)=>setPaymentMethod(e.target.value)}
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-[#183B43] outline-none transition focus:border-[#14B8A6] focus:bg-white focus:ring-2 focus:ring-[#CCFBF1]"
                 >
-                    <option value="">Select payment method</option>
-                    <option value="cash">Cash on Delivery</option>
-                    <option value="wallet">Mobile Wallet</option>
-                    <option value="card">Visa / Mastercard</option>
-                </select>
-            </div>
+                  <option value="">
+                    Select payment method
+                  </option>
 
-            <button
-             className="mt-6 w-full rounded-lg bg-blue-600
-              py-3 font-semibold text-white hover:bg-blue-700 transition
-              disabled:bg-gray-400
-              disabled:cursor-not-allowed"
-             type="button"
-             disabled={paymentMethod === "" || customerInfo.name === "" || customerInfo.phone ==="" || customerInfo.address === ""}
-             onClick={handlePlaceOrder}
-             
-            
-            >
-            Place Order
-            </button>
+                  <option value="cash">
+                    Cash on Delivery
+                  </option>
+
+                  <option value="wallet">
+                    Mobile Wallet
+                  </option>
+
+                  <option value="card">
+                    Visa / Mastercard
+                  </option>
+                </select>
+              </div>
+
+              {/* Place Order */}
+              <button
+                type="button"
+                disabled={
+                  paymentMethod === "" ||
+                  customerInfo.name === "" ||
+                  customerInfo.phone === "" ||
+                  customerInfo.address === ""
+                }
+                onClick={handlePlaceOrder}
+                className="mt-6 w-full rounded-xl bg-[#14B8A6] py-3.5 font-bold text-white transition hover:bg-[#0F766E] disabled:cursor-not-allowed disabled:bg-slate-300"
+              >
+                Place Order
+              </button>
+
+            </div>
+          </div>
+
+          {/* Order Summary */}
+          <div className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-24">
+
+            <p className="text-sm font-bold uppercase tracking-wider text-[#14B8A6]">
+              Summary
+            </p>
+
+            <h2 className="mt-1 text-xl font-bold text-[#183B43]">
+              Order Summary
+            </h2>
+
+            <div className="mt-6 space-y-4">
+
+              {cartItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center justify-between gap-4 rounded-xl bg-[#F8FAFC] p-3"
+                >
+
+                  <div className="min-w-0">
+                    <p className="font-bold text-[#183B43]">
+                      {item.name}
+                    </p>
+
+                    <p className="mt-1 text-sm text-slate-500">
+                      Quantity: {item.quantity}
+                    </p>
+                  </div>
+
+                  <p className="shrink-0 font-bold text-[#0F766E]">
+                    {item.price * item.quantity} EGP
+                  </p>
+
+                </div>
+              ))}
+
+              {/* Total */}
+              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
+
+                <span className="font-bold text-[#183B43]">
+                  Total
+                </span>
+
+                <span className="text-2xl font-bold text-[#0F766E]">
+                  {cartTotal} EGP
+                </span>
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-         {/* ديف مختصر الطلب */}
-        <div className="border rounded-xl p-6 h-fit">
-
-          <h2 className="text-xl font-semibold mb-6">
-            Order Summary
-          </h2>
-          <div className="space-y-4">
-
-            {cartItems.map((item) => (
-                <div
-                key={item.id}
-                className="flex items-center justify-between"
-                >
-
-                <div>
-                    <p className="font-medium">
-                    {item.name}
-                    </p>
-
-                    <p className="text-sm text-slate-500">
-                    Quantity: {item.quantity}
-                    </p>
-                </div>
-
-                <p className="font-semibold">
-                    {item.price * item.quantity} EGP
-                </p>
-
-                </div>
-            ))}
-
-            <div className="mt-6 border-t pt-4 flex items-center justify-between">
-                <span className="font-semibold">
-                    Total
-                </span>
-
-                <span className="text-xl font-bold">
-                    {cartTotal} EGP
-                </span>
-            </div>
-
-            </div>
-
-        </div>
-
       </div>
-
     </div>
   );
 };
 
 export default Checkout;
+

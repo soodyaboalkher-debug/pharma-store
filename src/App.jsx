@@ -12,12 +12,18 @@ import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Orders from "./pages/Orders";
 import Account from "./pages/Account";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 
 const App = () => {
   return (
+   
+
     <BrowserRouter>
+     <ScrollToTop />
+     <div className="flex min-h-screen flex-col">
       <Navbar />
  
 
@@ -41,8 +47,9 @@ const App = () => {
 
          <Route path="/category/:category" element={<Category />} />
       </Routes>
+      <Footer />
 
-
+     </div>
     </BrowserRouter>
   );
 };
