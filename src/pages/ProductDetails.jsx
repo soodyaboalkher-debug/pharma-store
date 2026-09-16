@@ -55,9 +55,11 @@ const ProductDetails = () => {
             {/* Product Image */}
             <div className="flex min-h-[400px] items-center justify-center bg-[#CCFBF1] p-8 lg:min-h-[600px]">
               <div className="flex h-full w-full items-center justify-center rounded-2xl border border-white/70 bg-white/60">
-                <span className="text-lg font-medium text-[#64748B]">
-                  Product Image
-                </span>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-full w-full object-contain p-6"
+                />
               </div>
             </div>
 

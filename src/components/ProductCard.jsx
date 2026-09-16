@@ -37,7 +37,10 @@ const ProductCard = ({ product }) => {
       <div className="relative mb-4 flex h-48 items-center justify-center rounded-xl bg-[#F0FDFA]">
 
         <span className="text-sm font-medium text-slate-400">
-          Product Image
+       <img
+          src={product.image}
+          alt={product.name}
+        />
         </span>
 
         {/* Offer Badge */}

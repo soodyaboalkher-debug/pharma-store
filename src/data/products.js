@@ -1,5 +1,7 @@
 
 
+
+
 const products = [
 
   // Medicine
@@ -15,6 +17,7 @@ const products = [
     oldPrice: 150,
    discount: 20,
    isOffer: true,
+   image: "/images/panadol.jpg",
   },
 
   {
@@ -25,6 +28,7 @@ const products = [
     rating: 4.9,
     stock: 5,
     description: "An over-the-counter medicine commonly used for temporary relief of pain, inflammation, and fever.",
+    image:"/images/brufen400tab.jpg"
   },
 
   {
@@ -35,6 +39,7 @@ const products = [
     rating: 4.1,
     stock: 2,
     description: "A commonly used medicine for temporary relief of pain and inflammation.",
+    image:"/images/cataflam.jpg"
   },
 
   {
@@ -45,6 +50,7 @@ const products = [
     rating: 4.7,
     stock: 9,
     description: "Throat lozenges designed to provide soothing relief from minor throat discomfort.",
+    image:"/images/strepsils.jpg"
   },
 
   // Vitamins
@@ -57,6 +63,7 @@ const products = [
     rating: 3.8,
     stock: 3,
     description: "A vitamin C supplement designed to support daily nutritional needs and general wellness.",
+    image: "/images/vitc.jpg",
   },
 
   {
@@ -67,6 +74,7 @@ const products = [
     rating: 4.0,
     stock: 6,
     description: "A vitamin D3 supplement intended to help support normal daily nutritional requirements.",
+    image: "/images/vitd3.jpg",
   },
 
   {
@@ -80,6 +88,7 @@ const products = [
     oldPrice: 420,
     discount: 17,
     isOffer: true,
+    image: "/images/omega 3.jpg",
   },
 
   {
@@ -90,6 +99,8 @@ const products = [
     rating: 4.2,
     stock: 3,
     description: "A daily multivitamin supplement containing a combination of essential vitamins and nutrients.",
+    image: "/images/multiv.jpg",
+    
   },
 
   // Skincare
@@ -102,6 +113,7 @@ const products = [
     rating: 3.8,
     stock: 1,
     description: "A moisturizing cream designed to help keep the skin hydrated and feeling soft and comfortable.",
+    image: "/images/moist.jpg",
   },
 
   {
@@ -112,6 +124,7 @@ const products = [
     rating: 3.8,
     stock: 10,
     description: "A facial cleanser designed to gently remove everyday dirt, excess oil, and impurities from the skin.",
+    image: "/images/facewash.jpg",
   },
 
   {
@@ -122,6 +135,7 @@ const products = [
     rating: 3.8,
     stock: 11,
     description: "A daily sunscreen formulated with SPF 50 to help protect the skin from harmful UV exposure.",
+    image: "/images/sunscreen.jpg",
   },
 
   {
@@ -132,6 +146,7 @@ const products = [
     rating: 4.8,
     stock: 4,
     description: "A body lotion designed to moisturize the skin and leave it feeling smooth and comfortable.",
+    image: "/images/bodysplash.jpg",
   },
 
   // Personal Care
@@ -144,6 +159,7 @@ const products = [
     rating: 5.0,
     stock: 2,
     description: "A daily hair cleanser designed to remove buildup and leave the hair feeling clean and refreshed.",
+    image: "/images/shampoo.jpg",
   },
 
   {
@@ -154,6 +170,7 @@ const products = [
     rating: 3.8,
     stock: 11,
     description: "A hair conditioner designed to help improve softness, smoothness, and manageability.",
+    image: "/images/conditioner.jpg",
   },
 
   {
@@ -164,6 +181,7 @@ const products = [
     rating: 4.8,
     stock: 3,
     description: "A daily toothpaste designed to help clean the teeth and maintain everyday oral hygiene.",
+    image: "/images/toothpaste.jpg",
   },
 
   {
@@ -174,6 +192,7 @@ const products = [
     rating: 3.7,
     stock: 6,
     description: "A mouthwash designed to complement daily brushing and help maintain a fresh and clean mouth.",
+    image: "/images/mouthwash.jpg",
   },
 
   // Baby Care
@@ -189,6 +208,7 @@ const products = [
     oldPrice: 190,
     discount: 21,
     isOffer: true,
+    image: "/images/infbodylution.jpg",
   },
 
   {
@@ -199,6 +219,7 @@ const products = [
     rating: 3.1,
     stock: 11,
     description: "A gentle shampoo designed for babies and suitable for everyday hair and scalp cleansing.",
+    image: "/images/bodyshampoo.jpg",
   },
 
   {
@@ -209,6 +230,7 @@ const products = [
     rating: 4.8,
     stock: 3,
     description: "A gentle baby cream designed to help moisturize and care for delicate skin.",
+    image: "/images/bodycream.jpg",
   },
 
   {
@@ -219,6 +241,7 @@ const products = [
     rating: 4.0,
     stock: 5,
     description: "A baby care powder designed to help keep the skin feeling dry, fresh, and comfortable.",
+    image: "/images/bodypowder.jpg",
   },
 
 ];
