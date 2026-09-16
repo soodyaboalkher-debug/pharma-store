@@ -77,3 +77,30 @@ This project was built to practice and demonstrate practical frontend developmen
 **Saudi Adel**
 
 Frontend Developer focused on building clean, responsive, and user-friendly web applications with React.js and JavaScript.
+
+## 📸 Screenshots
+
+### 🏠 Home
+
+![Home](public/screenshots/home.png)
+
+### 💊 Products
+
+![Products](public/screenshots/products.png)
+
+### 📦 Product Details
+
+![Product Details](public/screenshots/product-details.png)
+
+### 🛒 Cart
+
+![Cart](public/screenshots/cart.png)
+
+### ❤️ Wishlist
+
+![Wishlist](public/screenshots/wishlist.png)
+
+### 💳 Checkout
+
+![Checkout](public/screenshots/checkout.png)
+
