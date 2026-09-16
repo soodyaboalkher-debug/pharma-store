@@ -78,29 +78,31 @@ This project was built to practice and demonstrate practical frontend developmen
 
 Frontend Developer focused on building clean, responsive, and user-friendly web applications with React.js and JavaScript.
 
+
 ## 📸 Screenshots
 
 ### 🏠 Home
 
-![Home](public/screenshots/home.png)
+<img src="./public/screenshots/home.png" alt="Home" width="800"/>
 
 ### 💊 Products
 
-![Products](public/screenshots/products.png)
+<img src="./public/screenshots/products.png" alt="Products" width="800"/>
 
 ### 📦 Product Details
 
-![Product Details](public/screenshots/product-details.png)
+<img src="./public/screenshots/product-details.png" alt="Product Details" width="800"/>
 
 ### 🛒 Cart
 
-![Cart](public/screenshots/cart.png)
+<img src="./public/screenshots/cart.png" alt="Cart" width="800"/>
 
 ### ❤️ Wishlist
 
-![Wishlist](public/screenshots/wishlist.png)
+<img src="./public/screenshots/wishlist.png" alt="Wishlist" width="800"/>
 
 ### 💳 Checkout
 
-![Checkout](public/screenshots/checkout.png)
+<img src="./public/screenshots/checkout.png" alt="Checkout" width="800"/>
+
 
