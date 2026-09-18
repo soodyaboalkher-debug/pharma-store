@@ -58,7 +58,10 @@ const Navbar = () => {
 
             <Link
               to="/"
-              className="rounded-xl px-3 py-2 font-bold text-[#183B43] transition hover:bg-white hover:text-[#0F766E]"
+              className="rounded-xl px-3 py-2
+               font-bold text-[#183B43] transition hover:bg-white hover:text-[#0F766E]"
+
+               onClick={()=>{window.scrollTo({top:0,behavior:"smooth"})}}
             >
               Home
             </Link>
@@ -66,13 +69,21 @@ const Navbar = () => {
             <Link
               to="/products"
               className="rounded-xl px-3 py-2 font-bold text-[#183B43] transition hover:bg-white hover:text-[#0F766E]"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
             >
               Products
             </Link>
 
             <Link
               to="/offers"
-              className="rounded-xl px-3 py-2 font-bold text-[#183B43] transition hover:bg-white hover:text-[#0F766E]"
+              className="rounded-xl px-3 py-2 
+              font-bold text-[#183B43] transition hover:bg-white hover:text-[#0F766E]"
+              onClick={()=>{window.scrollTo({top:0,behavior:"smooth"})}}
             >
               Offers
             </Link>
@@ -127,6 +138,7 @@ const Navbar = () => {
             <Link
               to="/orders"
               className="relative font-bold text-[#183B43] transition hover:text-[#0F766E]"
+              onClick={()=>{window.scroll({top:0,behavior:"smooth"})}}
             >
               Orders
 
@@ -141,6 +153,7 @@ const Navbar = () => {
             <Link
               to="/wishlist"
               className="relative text-[#0F766E] transition hover:text-[#14B8A6]"
+              onClick={()=>{window.scroll({top:0,behavior:"smooth"})}}
             >
               {wishlistCount > 0 && (
                 <span className="absolute -right-2 -top-2 flex h-5 w-4 items-center justify-center rounded-full bg-[#0F766E] text-xs font-bold text-white">
@@ -155,6 +168,7 @@ const Navbar = () => {
             <Link
               to="/cart"
               className="relative text-[#0F766E] transition hover:text-[#14B8A6]"
+              onClick={()=>{window.scroll({top:0,behavior:"smooth"})}}
             >
               <FaShoppingCart className="text-xl" />
 
@@ -169,6 +183,7 @@ const Navbar = () => {
             <Link
               to="/account"
               className="text-[#0F766E] transition hover:text-[#14B8A6]"
+              onClick={()=>{window.scroll({top:0,behavior:"smooth"})}}
             >
               <FaUser className="text-xl" />
             </Link>

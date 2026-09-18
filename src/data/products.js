@@ -181,7 +181,7 @@ const products = [
     rating: 4.8,
     stock: 3,
     description: "A daily toothpaste designed to help clean the teeth and maintain everyday oral hygiene.",
-    image: "/images/toothpaste.jpg",
+    image: "/images/toothpast.jpg",
   },
 
   {

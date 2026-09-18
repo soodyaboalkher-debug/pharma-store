@@ -62,8 +62,8 @@ const Products = () => {
   const clearFilters = () => {
     setSearch("");
     setCategoryFilter("");
-    setPriceFilter("");
-    setSort("");
+    setPriceFilter("");    
+    setSort("");                
 
     setSearchParams({});
   };
@@ -157,7 +157,7 @@ const Products = () => {
               type="button"
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Open categories"
-              className="mb-6 flex h-9 w-9 items-center justify-center rounded-full border border-[#CCFBF1] bg-white text-[#0F766E] shadow-sm transition hover:bg-[#CCFBF1] hover:shadow-md"
+              className="fixed left-2 top-1/2 z-50 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#CCFBF1] bg-white text-[#0F766E] shadow-md transition hover:bg-[#CCFBF1] hover:shadow-md"
             >
               <FaChevronRight className="text-xs" />
             </button>
