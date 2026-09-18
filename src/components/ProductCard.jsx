@@ -36,12 +36,13 @@ const ProductCard = ({ product }) => {
       {/* صورة المنتج + Wishlist + Offer */}
       <div className="relative mb-4 flex h-48 items-center justify-center rounded-xl bg-[#F0FDFA]">
 
-      <span className="text-sm font-medium text-slate-400">
-       <img
-          src={product.image}
-          alt={product.name}
-        />
-        </span>
+        <div className="h-48 w-full overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-full w-full object-contain"
+          />
+        </div>
 
         {/* Offer Badge */}
         {product.isOffer && (
